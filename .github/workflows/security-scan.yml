@@ -1,11 +1,139 @@
-name: security-scan
-on: workflow_dispatch
+name: SESSION 20 - Devcontainer Build and Trivy Scan
+
+on:
+  workflow_dispatch:
+
 permissions:
   contents: read
+
+concurrency:
+  group: session-20-msr-011
+  cancel-in-progress: false
+
 jobs:
-  simulation:
+  verify-build-scan:
+    name: Verify digest, build image, and scan
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      BASE_IMAGE: mcr.microsoft.com/devcontainers/python:1-3.12-bookworm
+      LOCAL_IMAGE: dex-ai-contracts-devcontainer:${{ github.sha }}
+      EVIDENCE_DIR: reports/session20-runtime
+
     steps:
-      - uses: actions/checkout@v4
-      - run: make evidence
-        env: {DEX_AI_ENVIRONMENT: development, DEX_AI_REGISTRY_MODE: dry-run}
+      - name: Check out the exact repository revision
+        uses: actions/checkout@v4
+
+      - name: Set up the repository Python version
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.13'
+
+      - name: Prepare evidence directory
+        shell: bash
+        run: mkdir -p "$EVIDENCE_DIR"
+
+      - name: Record tool versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker version | tee "$EVIDENCE_DIR/docker-version.txt"
+          docker buildx version | tee "$EVIDENCE_DIR/docker-buildx-version.txt"
+
+      - name: Resolve and verify immutable devcontainer digest
+        id: digest
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker pull "$BASE_IMAGE" 2>&1 | tee "$EVIDENCE_DIR/docker-pull.log"
+
+          BASE_DIGEST_REF="$(docker image inspect "$BASE_IMAGE" \
+            --format '{{index .RepoDigests 0}}')"
+
+          case "$BASE_DIGEST_REF" in
+            mcr.microsoft.com/devcontainers/python@sha256:*) ;;
+            *) echo "Unexpected or missing immutable digest: $BASE_DIGEST_REF" >&2; exit 1 ;;
+          esac
+
+          printf '%s\n' "$BASE_DIGEST_REF" | tee "$EVIDENCE_DIR/devcontainer-base-digest.txt"
+          printf 'base_digest_ref=%s\n' "$BASE_DIGEST_REF" >> "$GITHUB_OUTPUT"
+
+      - name: Create digest-pinned build input
+        shell: bash
+        env:
+          BASE_DIGEST_REF: ${{ steps.digest.outputs.base_digest_ref }}
+        run: |
+          set -euo pipefail
+          {
+            printf 'FROM %s\n' "$BASE_DIGEST_REF"
+            tail -n +2 .devcontainer/Dockerfile
+          } > "$EVIDENCE_DIR/Dockerfile.resolved"
+
+          grep -Eq '^FROM mcr\.microsoft\.com/devcontainers/python@sha256:[0-9a-f]{64}$' \
+            "$EVIDENCE_DIR/Dockerfile.resolved"
+
+      - name: Build devcontainer image from the verified digest
+        shell: bash
+        run: |
+          set -o pipefail
+          docker build \
+            --pull=false \
+            --no-cache \
+            --file "$EVIDENCE_DIR/Dockerfile.resolved" \
+            --tag "$LOCAL_IMAGE" \
+            .devcontainer 2>&1 | tee "$EVIDENCE_DIR/docker-build.log"
+
+          docker image inspect "$LOCAL_IMAGE" > "$EVIDENCE_DIR/built-image-inspect.json"
+
+      - name: Run repository verification
+        shell: bash
+        run: |
+          set -o pipefail
+          make all 2>&1 | tee "$EVIDENCE_DIR/make-all.log"
+
+      - name: Run Trivy vulnerability scan
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          image-ref: ${{ env.LOCAL_IMAGE }}
+          format: json
+          output: reports/session20-runtime/trivy-report.json
+          severity: HIGH,CRITICAL
+          ignore-unfixed: false
+          exit-code: '0'
+
+      - name: Record Trivy version
+        shell: bash
+        run: trivy --version | tee "$EVIDENCE_DIR/trivy-version.txt"
+
+      - name: Enforce zero HIGH or CRITICAL vulnerabilities
+        shell: bash
+        run: |
+          set -euo pipefail
+          VULNERABILITY_COUNT="$(jq \
+            '[.Results[]?.Vulnerabilities[]? | select(.Severity == "HIGH" or .Severity == "CRITICAL")] | length' \
+            "$EVIDENCE_DIR/trivy-report.json")"
+
+          printf '%s\n' "$VULNERABILITY_COUNT" | tee "$EVIDENCE_DIR/high-critical-count.txt"
+          test "$VULNERABILITY_COUNT" -eq 0
+
+      - name: Write SESSION 20 runtime result
+        if: success()
+        shell: bash
+        env:
+          BASE_DIGEST_REF: ${{ steps.digest.outputs.base_digest_ref }}
+        run: |
+          jq -n \
+            --arg commit "$GITHUB_SHA" \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg digest "$BASE_DIGEST_REF" \
+            '{session:"SESSION 20",commit:$commit,run_id:$run_id,devcontainer_digest:$digest,docker_build:"PASS",trivy_scan:"PASS",high_critical_vulnerabilities:0,msr_011_closure_evidence:"COMPLETE_PENDING_REPOSITORY_UPDATE",publication_gate:"MUST_REMAIN_BLOCKED_UNTIL_CLOSURE_EVIDENCE_IS_COMMITTED"}' \
+            > "$EVIDENCE_DIR/session20-runtime-result.json"
+
+      - name: Upload audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: session20-msr-011-evidence-${{ github.run_id }}
+          path: reports/session20-runtime/
+          if-no-files-found: error
+          retention-days: 90
