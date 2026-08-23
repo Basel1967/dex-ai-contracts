@@ -6,12 +6,16 @@ agent, provider integration, production credential, trading, signing-wallet or f
 
 ## Current gate
 
-**CONDITIONAL PASS — repository bootstrap; FAIL-CLOSED for Event Envelope publication.** The schema is a
-`Draft` candidate with technical Event Envelope semantics closed. Publication remains blocked solely by MSR-011: an independently verified immutable devcontainer base digest, build log and container security scan. See `decisions/missing-source-register.yaml`.
+**PASS — Publication Gate OPEN.** Event Envelope semantic closure passed, all P0 missing-source items are closed,
+and SESSION 20 verified an immutable devcontainer digest, a successful Docker build, repository conformance, and a
+Trivy scan with zero fixable `HIGH` or `CRITICAL` vulnerabilities. Unfixed residual risk is documented and rescanned
+weekly. See `decisions/missing-source-register.yaml` and `evidence/latest/session20-publication-gate.json`.
+
+Opening the gate does not itself begin or implement any subsequent contract.
 
 ## Reproducible commands
 
 `make all`
 
-Python 3.12.13 is pinned. The toolchain uses only the Python standard library. Network access and credentials are
-neither required nor used.
+Python 3.12 is pinned by the digest-resolved devcontainer. Production credentials are neither required nor used.
+

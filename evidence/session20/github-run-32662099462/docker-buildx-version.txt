@@ -1,0 +1,1 @@
+github.com/docker/buildx v0.36.1 1d8dde89b8aba914e05e45366770736fea1fd690

@@ -1,0 +1,13 @@
+{
+  "session": "SESSION 20",
+  "commit": "82c63659faea5be89c2fddda3c57872b1ca80937",
+  "run_id": "32662099462",
+  "devcontainer_digest": "python@sha256:a116514e19457bcb7af7efe9c3dd0b9b71e85b317694e7882a1c52aa15a78134",
+  "docker_build": "PASS",
+  "trivy_scan": "PASS",
+  "fixable_high_critical_vulnerabilities": 0,
+  "accepted_unfixed_high_critical_residual_risk": 70,
+  "residual_risk_policy": "TEMPORARY_ACCEPTANCE_WITH_WEEKLY_RESCAN",
+  "msr_011_closure_evidence": "COMPLETE_PENDING_REPOSITORY_UPDATE",
+  "publication_gate": "MUST_REMAIN_BLOCKED_UNTIL_CLOSURE_EVIDENCE_IS_COMMITTED"
+}

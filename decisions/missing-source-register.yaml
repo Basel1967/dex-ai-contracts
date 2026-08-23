@@ -1,6 +1,6 @@
 {
-  "register_status":"OPEN",
-  "publication_gate":"BLOCKED",
+  "register_status":"CLOSED",
+  "publication_gate":"OPEN",
   "entries":[
     {"id":"MSR-001","severity":"P0","status":"CLOSED","item":"Full SESSION 00-15 texts","evidence":"SESSION 17 review evidence retained"},
     {"id":"MSR-002","severity":"P0","status":"CLOSED","item":"Exact JSON types and nested shapes","resolution":"Closed JSON Schema 2020-12 profile","evidence":["schema.json","field-source-matrix.csv","conformance-report.json"],"resolved_by":"Basel Atta","approved_by":"Basel Atta","resolved_at":"2026-08-23T00:00:00.000000Z"},
@@ -12,6 +12,7 @@
     {"id":"MSR-008","severity":"P0","status":"CLOSED","item":"Replay metadata and cutoff","resolution":"Pinned replay lineage with available_at cutoff enforcement","evidence":["replay fixtures","future-data-leakage test"],"resolved_by":"Basel Atta","approved_by":"Basel Atta","resolved_at":"2026-08-23T00:00:00.000000Z"},
     {"id":"MSR-009","severity":"P0","status":"CLOSED","item":"Admission and quarantine","resolution":"Executable fail-closed status and reason model","evidence":["policy.md","runner.py","quarantine fixtures"],"resolved_by":"Basel Atta","approved_by":"Basel Atta","resolved_at":"2026-08-23T00:00:00.000000Z"},
     {"id":"MSR-010","severity":"P0","status":"CLOSED","item":"Named ownership and approval","resolution":"Single-owner development governance selected by user","evidence":["ownership-metadata.json","approval-metadata.json"],"resolved_by":"Basel Atta","approved_by":"Basel Atta","resolved_at":"2026-08-23T00:00:00.000000Z"},
-    {"id":"MSR-011","severity":"P0","status":"OPEN","item":"Approved immutable devcontainer base digest","source":"Runtime/toolchain decision","reason":"SESSION 20 verified that Docker and detected alternative container runtimes and image scanners are unavailable; the placeholder digest cannot be replaced without real verification","required_evidence":["registry-resolved digest","successful build log","security scan report"],"latest_attempt_evidence":["reports/session20-final-report.md","evidence/latest/session20-publication-gate.json"]}
+    {"id":"MSR-011","severity":"P0","status":"CLOSED","item":"Approved immutable devcontainer base digest","resolution":"Official Python 3.12 slim Bookworm base resolved and pinned; Docker build and Trivy policy gate passed","digest":"python@sha256:a116514e19457bcb7af7efe9c3dd0b9b71e85b317694e7882a1c52aa15a78134","evidence":["evidence/session20/github-run-32662099462/devcontainer-base-digest.txt","evidence/session20/github-run-32662099462/docker-build.log","evidence/session20/github-run-32662099462/trivy-report.json","evidence/session20/github-run-32662099462/session20-runtime-result.json"],"residual_risk":"70 unfixed HIGH/CRITICAL records accepted temporarily under SECURITY.md with weekly rescan","resolved_by":"Basel Atta","approved_by":"Basel Atta","resolved_at":"2026-08-23T19:43:00Z"}
   ]
 }
+
