@@ -1,1 +1,7 @@
-{"name":"dex-ai-contracts","build":{"dockerfile":"Dockerfile"},"remoteUser":"vscode"}
+{
+  "name": "dex-ai-contracts",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "vscode"
+}

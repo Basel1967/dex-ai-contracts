@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      BASE_IMAGE: mcr.microsoft.com/devcontainers/python:1-3.12-bookworm
+      BASE_IMAGE: python:3.12-slim-bookworm
       LOCAL_IMAGE: dex-ai-contracts-devcontainer:${{ github.sha }}
       EVIDENCE_DIR: reports/session20-runtime
 
@@ -51,7 +51,7 @@ jobs:
             --format '{{index .RepoDigests 0}}')"
 
           case "$BASE_DIGEST_REF" in
-            mcr.microsoft.com/devcontainers/python@sha256:*) ;;
+            python@sha256:*) ;;
             *) echo "Unexpected or missing immutable digest: $BASE_DIGEST_REF" >&2; exit 1 ;;
           esac
 
@@ -69,7 +69,7 @@ jobs:
             tail -n +2 .devcontainer/Dockerfile
           } > "$EVIDENCE_DIR/Dockerfile.resolved"
 
-          grep -Eq '^FROM mcr\.microsoft\.com/devcontainers/python@sha256:[0-9a-f]{64}$' \
+          grep -Eq '^FROM python@sha256:[0-9a-f]{64}$' \
             "$EVIDENCE_DIR/Dockerfile.resolved"
 
       - name: Build devcontainer image from the verified digest
