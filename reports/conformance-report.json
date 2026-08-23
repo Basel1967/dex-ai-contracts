@@ -1,0 +1,225 @@
+{
+  "status": "PASS_WITH_BLOCKERS",
+  "passed": 43,
+  "failed": 0,
+  "blocked": [
+    "MSR-011"
+  ],
+  "results": [
+    {
+      "test": "valid-corrected-event",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "valid-empty-related-refs",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "valid-full-normalized",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "valid-full-raw-on-chain",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "valid-live-event",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "valid-minimal-normalized",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "valid-minimal-raw-on-chain",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "valid-minimal-system",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "valid-replay-event",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "valid-revocation-event",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "valid-root-event",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "valid-superseding-event",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-available-before-verification",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-empty-identifier",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-future-data-replay",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-hash-mismatch",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-illegal-null",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-impossible-timestamp-order",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-invalid-block-slot",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-invalid-enum",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-invalid-identifier",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-invalid-solana-signature",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-invalid-timestamp",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-invalid-trace-id",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-missing-required-field",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-multiple-change-references",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-negative-instruction-index",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-non-utc-timestamp",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-payload-redefines-envelope",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-quarantined-with-available-at",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-unknown-top-level",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-unsafe-raw-reference",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-unsupported-contract-version",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-unsupported-hash-algorithm",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "reject-wrong-fractional-precision",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "cryptographic-tampering-detected",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "canonical-serialization-deterministic",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "duplicate-event-id-detected",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "duplicate-idempotency-key-detected",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "late-distinct",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "out-of-order-distinct",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "field-closure-complete",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "test": "publication-fail-closed",
+      "detail": "",
+      "passed": true
+    }
+  ]
+}

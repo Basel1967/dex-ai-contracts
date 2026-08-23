@@ -1,0 +1,12 @@
+{
+  "governance_model":"SINGLE_OWNER_DEVELOPMENT_PROJECT",
+  "primary_owner":"Basel Atta",
+  "backup_owner":"Basel Atta",
+  "contract_approver":"Basel Atta",
+  "security_approver":"Basel Atta",
+  "release_governance_approver":"Basel Atta",
+  "quorum":1,
+  "scope":"development contract artifacts only",
+  "review_date":"2027-02-23",
+  "note":"Roles were explicitly supplied by the user. This records identity, not independent multi-party review. Revisit before team or production use."
+}

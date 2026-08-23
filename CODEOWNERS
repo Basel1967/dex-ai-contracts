@@ -1,0 +1,5 @@
+# Placeholders are intentional and block publication until replaced by named identities.
+* @dex-ai/contract-stewards
+/SECURITY.md @dex-ai/security-approvers
+/schemas/ @dex-ai/schema-stewards @dex-ai/contract-approvers
+/.github/workflows/ @dex-ai/security-approvers @dex-ai/release-governance

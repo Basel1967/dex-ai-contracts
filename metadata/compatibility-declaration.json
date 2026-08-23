@@ -1,0 +1,8 @@
+{
+  "schema_version":"1.0.0",
+  "event_version":"payload-specific SemVer",
+  "compatibility_mode":"NOT_APPLICABLE_UNPUBLISHED_PREDECESSOR",
+  "classification":"DRAFT_COMPLETION",
+  "published_predecessor":false,
+  "rules":{"optional_field_addition":"requires consumer review","requiredness_change":"breaking","enum_value_addition":"potentially breaking for closed consumers","pattern_change":"breaking when narrowing","nested_shape_change":"breaking unless strictly additive and optional","deprecation":"metadata-only; published bytes immutable"}
+}

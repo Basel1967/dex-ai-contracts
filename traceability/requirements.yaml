@@ -1,0 +1,39 @@
+{
+  "requirements": [
+    {
+      "id": "REQ-ENV-001",
+      "source": "SESSION 02 \u00a75",
+      "text": "Common envelope mandatory; payloads cannot redefine meanings"
+    },
+    {
+      "id": "REQ-ENV-002",
+      "source": "SESSION 02 \u00a75",
+      "text": "available_at null until eligibility requirements satisfied"
+    },
+    {
+      "id": "REQ-IDEM-001",
+      "source": "SESSION 02 \u00a723.3",
+      "text": "Duplicate delivery produces no duplicate business effect"
+    },
+    {
+      "id": "REQ-PIT-001",
+      "source": "SESSION 02 \u00a723.4 and SESSION 16 \u00a73",
+      "text": "Distinct times and cutoff by available_at"
+    },
+    {
+      "id": "REQ-ORDER-001",
+      "source": "SESSION 02 \u00a723.5",
+      "text": "On-chain order uses position before timestamps"
+    },
+    {
+      "id": "REQ-SEC-001",
+      "source": "SESSION 14 and SESSION 16 \u00a730-31",
+      "text": "No production credentials; least privilege"
+    },
+    {
+      "id": "REQ-PROMO-001",
+      "source": "SESSION 16 \u00a77",
+      "text": "Promotion reuses exact digest; no rebuild"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "links": [
+    {
+      "artifact": "schemas/events/event-envelope/1.0.0/schema.json",
+      "requirements": [
+        "REQ-ENV-001",
+        "REQ-ENV-002"
+      ]
+    },
+    {
+      "fixture": "fixtures/duplicate/a.json",
+      "requirements": [
+        "REQ-IDEM-001"
+      ]
+    },
+    {
+      "fixture": "fixtures/late/event.json",
+      "requirements": [
+        "REQ-PIT-001"
+      ]
+    },
+    {
+      "fixture": "fixtures/out-of-order/event.json",
+      "requirements": [
+        "REQ-ORDER-001"
+      ]
+    },
+    {
+      "test": "tests/conformance/test_contracts.py",
+      "requirements": [
+        "REQ-ENV-001",
+        "REQ-ENV-002",
+        "REQ-IDEM-001",
+        "REQ-PIT-001",
+        "REQ-ORDER-001",
+        "REQ-SEC-001",
+        "REQ-PROMO-001"
+      ]
+    }
+  ]
+}

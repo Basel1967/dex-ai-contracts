@@ -1,0 +1,100 @@
+{
+  "admission_status": "AVAILABLE",
+  "available_at": "2026-08-21T00:02:00.000000Z",
+  "causation_event_id": null,
+  "contract_name": "event-envelope",
+  "contract_version": "1.0.0",
+  "correlation_id": "urn:dex-ai:correlation:22222222222222222222222222222222",
+  "data_classification": "PUBLIC",
+  "event_domain": "CHAIN",
+  "event_id": "urn:dex-ai:event:11111111111111111111111111111111",
+  "event_stage": "RAW",
+  "event_time": "2026-08-21T00:00:00.000000Z",
+  "event_type": "MINT_INITIALIZED",
+  "event_version": "1.0.0",
+  "execution_mode": "REPLAY",
+  "finality_status": "NOT_APPLICABLE",
+  "idempotency_key": "sha256:294fc2860fc4a48319c383203ef46d6e10042abb22b95515dfd870f2709769c0",
+  "ingested_at": "2026-08-21T00:00:00.100000Z",
+  "integrity": {
+    "algorithm": "SHA-256",
+    "canonicalization": "RFC8785-JCS-PROFILE",
+    "digest": "f639b9826d4700248f4595d788481d13ec8a025f352a676386e818241c05ffe1",
+    "encoding": "UTF-8",
+    "scope": "payload",
+    "status": "VERIFIED",
+    "verified_at": "2026-08-21T00:00:00.150000Z"
+  },
+  "observed_at": "2026-08-21T00:00:00.000000Z",
+  "ordering_key": "urn:dex-ai:ordering:synthetic:test",
+  "ordering_position": "source:00000000000000000001:synthetic-001",
+  "payload": {
+    "mint": "So11111111111111111111111111111111111111112",
+    "synthetic": true
+  },
+  "payload_hash": "sha256:f639b9826d4700248f4595d788481d13ec8a025f352a676386e818241c05ffe1",
+  "producer_name": "synthetic-collector",
+  "producer_version": "1.0.0",
+  "provenance": {
+    "collection_method": "POLL",
+    "collector": {
+      "name": "synthetic-collector",
+      "version": "1.0.0"
+    },
+    "environment": "test",
+    "normalizer": null,
+    "observed_at": "2026-08-21T00:00:00.000000Z",
+    "origin_kind": "ORIGINAL",
+    "parent_artifact_refs": [],
+    "replay_lineage": null,
+    "source_identity": "urn:dex-ai:source:solana-test",
+    "transform_chain": []
+  },
+  "quality_flags": [],
+  "raw_ref": {
+    "artifact_id": "urn:dex-ai:raw:5555555555555555555555555555555555555555555555555555555555555555",
+    "availability": "AVAILABLE",
+    "captured_at": "2026-08-21T00:00:00.000000Z",
+    "content_hash": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+    "content_type": "application/json",
+    "environment": "test",
+    "locator": "ipfs://bafybeigdyrsyntheticartifact"
+  },
+  "related_entity_refs": [],
+  "replay": {
+    "code_version": "git:cccccccccccccccccccccccccccccccccccccccc",
+    "cutoff_at": "2026-08-21T00:01:00.000000Z",
+    "dataset_ref": "urn:dex-ai:dataset:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "environment": "test",
+    "policy_versions": {
+      "admission": "1.0.0"
+    },
+    "replay_id": "urn:dex-ai:replay:88888888888888888888888888888888",
+    "replay_run_id": "urn:dex-ai:replay-run:99999999999999999999999999999999",
+    "schema_versions": {
+      "envelope": "1.0.0"
+    },
+    "seed": 42,
+    "snapshot_ref": "urn:dex-ai:snapshot:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "source_artifact_versions": {
+      "source": "1.0.0"
+    }
+  },
+  "retention_class": "RAW_EVIDENCE_365D",
+  "schema_versions": {
+    "envelope": "1.0.0",
+    "normalizer": null,
+    "payload": "1.0.0"
+  },
+  "source_id": "urn:dex-ai:source:solana-test",
+  "source_record_id": "synthetic-001",
+  "source_type": "SYNTHETIC",
+  "subject_ref": "urn:dex-ai:entity:token:canonical:So11111111111111111111111111111111111111112",
+  "trace_context": {
+    "parent_span_id": null,
+    "span_id": "4444444444444444",
+    "trace_flags": "01",
+    "trace_id": "33333333333333333333333333333333"
+  },
+  "verification_status": "VERIFIED"
+}

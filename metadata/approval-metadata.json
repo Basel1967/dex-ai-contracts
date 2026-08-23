@@ -1,0 +1,10 @@
+{
+  "recorded_at":"2026-08-23T00:00:00.000000Z",
+  "recorded_identity":"Basel Atta",
+  "technical_semantic_closure":"APPROVED_BY_PROJECT_OWNER",
+  "security_profile":"APPROVED_BY_PROJECT_OWNER",
+  "release_governance":"APPROVED_BY_PROJECT_OWNER",
+  "publication_approval":"NOT_GRANTED_WHILE_MSR_011_OPEN",
+  "evidence":"SESSION 18 user-provided role assignments and instruction to continue",
+  "independent_review":false
+}

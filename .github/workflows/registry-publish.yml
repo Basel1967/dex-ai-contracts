@@ -1,0 +1,11 @@
+name: registry-publish
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  simulation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make evidence
+        env: {DEX_AI_ENVIRONMENT: development, DEX_AI_REGISTRY_MODE: dry-run}

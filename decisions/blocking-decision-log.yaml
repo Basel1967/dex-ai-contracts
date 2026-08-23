@@ -1,0 +1,19 @@
+{
+  "decisions": [
+    {
+      "id": "BDL-001",
+      "status": "BLOCKING",
+      "decision": "Event Envelope schema remains Draft and cannot be published while any P0 is open."
+    },
+    {
+      "id": "BDL-002",
+      "status": "BLOCKING",
+      "decision": "Owner placeholders cannot approve or publish."
+    },
+    {
+      "id": "BDL-003",
+      "status": "BLOCKING",
+      "decision": "Conformance assertions for unresolved semantics must report BLOCKED, never PASS."
+    }
+  ]
+}
