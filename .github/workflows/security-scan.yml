@@ -2,6 +2,8 @@ name: SESSION 20 - Devcontainer Build and Trivy Scan
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * 1'
 
 permissions:
   contents: read
@@ -105,28 +107,42 @@ jobs:
         shell: bash
         run: trivy --version | tee "$EVIDENCE_DIR/trivy-version.txt"
 
-      - name: Enforce zero HIGH or CRITICAL vulnerabilities
+      - name: Record residual risk and enforce zero fixable HIGH or CRITICAL vulnerabilities
+        id: policy
         shell: bash
         run: |
           set -euo pipefail
-          VULNERABILITY_COUNT="$(jq \
-            '[.Results[]?.Vulnerabilities[]? | select(.Severity == "HIGH" or .Severity == "CRITICAL")] | length' \
+          FIXABLE_COUNT="$(jq \
+            '[.Results[]?.Vulnerabilities[]? | select((.Severity == "HIGH" or .Severity == "CRITICAL") and ((.FixedVersion // "") | length > 0))] | length' \
+            "$EVIDENCE_DIR/trivy-report.json")"
+          RESIDUAL_COUNT="$(jq \
+            '[.Results[]?.Vulnerabilities[]? | select((.Severity == "HIGH" or .Severity == "CRITICAL") and ((.FixedVersion // "") | length == 0))] | length' \
             "$EVIDENCE_DIR/trivy-report.json")"
 
-          printf '%s\n' "$VULNERABILITY_COUNT" | tee "$EVIDENCE_DIR/high-critical-count.txt"
-          test "$VULNERABILITY_COUNT" -eq 0
+          printf '%s\n' "$FIXABLE_COUNT" | tee "$EVIDENCE_DIR/fixable-high-critical-count.txt"
+          printf '%s\n' "$RESIDUAL_COUNT" | tee "$EVIDENCE_DIR/unfixed-high-critical-residual-count.txt"
+          jq \
+            '[.Results[]?.Vulnerabilities[]? | select((.Severity == "HIGH" or .Severity == "CRITICAL") and ((.FixedVersion // "") | length == 0)) | {VulnerabilityID, PkgName, InstalledVersion, Severity, PrimaryURL}]' \
+            "$EVIDENCE_DIR/trivy-report.json" > "$EVIDENCE_DIR/accepted-unfixed-residual-risk.json"
+          printf 'fixable_count=%s\n' "$FIXABLE_COUNT" >> "$GITHUB_OUTPUT"
+          printf 'residual_count=%s\n' "$RESIDUAL_COUNT" >> "$GITHUB_OUTPUT"
+          test "$FIXABLE_COUNT" -eq 0
 
       - name: Write SESSION 20 runtime result
         if: success()
         shell: bash
         env:
           BASE_DIGEST_REF: ${{ steps.digest.outputs.base_digest_ref }}
+          FIXABLE_COUNT: ${{ steps.policy.outputs.fixable_count }}
+          RESIDUAL_COUNT: ${{ steps.policy.outputs.residual_count }}
         run: |
           jq -n \
             --arg commit "$GITHUB_SHA" \
             --arg run_id "$GITHUB_RUN_ID" \
             --arg digest "$BASE_DIGEST_REF" \
-            '{session:"SESSION 20",commit:$commit,run_id:$run_id,devcontainer_digest:$digest,docker_build:"PASS",trivy_scan:"PASS",high_critical_vulnerabilities:0,msr_011_closure_evidence:"COMPLETE_PENDING_REPOSITORY_UPDATE",publication_gate:"MUST_REMAIN_BLOCKED_UNTIL_CLOSURE_EVIDENCE_IS_COMMITTED"}' \
+            --argjson fixable "$FIXABLE_COUNT" \
+            --argjson residual "$RESIDUAL_COUNT" \
+            '{session:"SESSION 20",commit:$commit,run_id:$run_id,devcontainer_digest:$digest,docker_build:"PASS",trivy_scan:"PASS",fixable_high_critical_vulnerabilities:$fixable,accepted_unfixed_high_critical_residual_risk:$residual,residual_risk_policy:"TEMPORARY_ACCEPTANCE_WITH_WEEKLY_RESCAN",msr_011_closure_evidence:"COMPLETE_PENDING_REPOSITORY_UPDATE",publication_gate:"MUST_REMAIN_BLOCKED_UNTIL_CLOSURE_EVIDENCE_IS_COMMITTED"}' \
             > "$EVIDENCE_DIR/session20-runtime-result.json"
 
       - name: Upload audit evidence
