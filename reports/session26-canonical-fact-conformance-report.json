@@ -1,0 +1,99 @@
+{
+  "session": "SESSION 26",
+  "contract": "Canonical Fact 1.0.0",
+  "status": "PASS",
+  "passed": 18,
+  "failed": 0,
+  "results": [
+    {
+      "test": "schema-draft-2020-12",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "schema-closed-and-required",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "candidate-not-published",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "accept-active-mint-initialized",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "accept-corrected-version",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "accept-unresolved-conflict",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "accept-late-confirmation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-active-contradiction",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-assessed-without-method",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-duplicate-evidence-id-different-hash",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-entity-value-mismatch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-invented-false",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-missing-lineage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-unverified-lineage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-version-gap",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "candidate-metadata",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "dependency-traceability",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "published-dependency-digests",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

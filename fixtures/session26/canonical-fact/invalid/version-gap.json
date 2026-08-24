@@ -1,0 +1,1 @@
+{"base":"valid/active-mint-initialized.json","mutation":{"fact_version":3,"supersedes_version":1},"expected_error":"version-chain"}

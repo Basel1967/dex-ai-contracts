@@ -1,0 +1,15 @@
+{
+  "session":"SESSION 26",
+  "candidate":"urn:dex-ai:schema:fact:canonical-fact:1.0.0",
+  "publication_status":"NOT_PUBLISHED",
+  "dependency_chain":[
+    "urn:dex-ai:schema:fact:canonical-fact:1.0.0",
+    "urn:dex-ai:schema:event:normalized-event:1.0.0",
+    "urn:dex-ai:schema:event:raw-event:1.0.0",
+    "urn:dex-ai:schema:event:event-envelope:1.0.0"
+  ],
+  "foundation_scope":{"entity_type":"SOLANA_MINT","fact_type":"MINT_INITIALIZED"},
+  "published_registry_mutated":false,
+  "agents_started":false,
+  "services_started":false
+}

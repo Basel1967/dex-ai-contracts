@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:dex-ai:schema:fact:canonical-fact:1.0.0",
+  "title": "DEX AI Canonical Fact Payload v1.0.0",
+  "x-artifact-status": "Foundation Candidate",
+  "x-publication-status": "NOT_PUBLISHED",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["fact_id","fact_version","entity_id","entity_type","fact_type","fact_value","fact_status","valid_from","valid_to","recorded_at","supersedes_version","correction_reason","evidence","resolution_status","confidence","freshness","lineage","canonicalization_profile","schema_ref","idempotency_key","trace_id"],
+  "properties": {
+    "fact_id": {"type":"string","pattern":"^urn:dex-ai:fact:[0-9a-f]{64}$"},
+    "fact_version": {"type":"integer","minimum":1},
+    "entity_id": {"type":"string","pattern":"^urn:dex-ai:entity:solana:mint:[1-9A-HJ-NP-Za-km-z]{32,44}$"},
+    "entity_type": {"const":"SOLANA_MINT"},
+    "fact_type": {"const":"MINT_INITIALIZED"},
+    "fact_value": {"type":"object","additionalProperties":false,"required":["mint_address","initialized","synthetic"],"properties":{"mint_address":{"type":"string","pattern":"^[1-9A-HJ-NP-Za-km-z]{32,44}$"},"initialized":{"const":true},"synthetic":{"type":"boolean"}}},
+    "fact_status": {"enum":["ACTIVE","CORRECTED","RETRACTED","CONFLICTED"]},
+    "valid_from": {"$ref":"#/$defs/timestamp"},
+    "valid_to": {"oneOf":[{"type":"null"},{"$ref":"#/$defs/timestamp"}]},
+    "recorded_at": {"$ref":"#/$defs/timestamp"},
+    "supersedes_version": {"type":["integer","null"],"minimum":1},
+    "correction_reason": {"oneOf":[{"type":"null"},{"$ref":"#/$defs/diagnostic"}]},
+    "evidence": {"type":"array","minItems":1,"maxItems":128,"items":{"$ref":"#/$defs/evidence"}},
+    "resolution_status": {"enum":["UNCONTESTED","UNRESOLVED","RESOLVED"]},
+    "confidence": {"$ref":"#/$defs/confidence"},
+    "freshness": {"$ref":"#/$defs/freshness"},
+    "lineage": {"$ref":"#/$defs/lineage"},
+    "canonicalization_profile": {"type":"string","pattern":"^urn:dex-ai:canonicalization-profile:[a-z0-9-]+:[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "schema_ref": {"const":"urn:dex-ai:schema:fact:canonical-fact:1.0.0"},
+    "idempotency_key": {"type":"string","pattern":"^urn:dex-ai:idempotency:[0-9a-f]{64}$"},
+    "trace_id": {"type":"string","pattern":"^[0-9a-f]{32}$"}
+  },
+  "$defs": {
+    "timestamp":{"type":"string","pattern":"^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]\\.[0-9]{6}Z$"},
+    "diagnostic":{"type":"object","additionalProperties":false,"required":["code","message"],"properties":{"code":{"type":"string","pattern":"^FACT-[A-Z]+-[0-9]{3}$"},"message":{"type":"string","minLength":1,"maxLength":512}}},
+    "evidence":{"type":"object","additionalProperties":false,"required":["normalized_event_id","normalized_payload_hash","normalized_paths","evidence_role","event_time","observed_at","source_entity_refs","lineage_verified"],"properties":{"normalized_event_id":{"type":"string","pattern":"^urn:dex-ai:event:[0-9a-f]{32}$"},"normalized_payload_hash":{"type":"string","pattern":"^[0-9a-f]{64}$"},"normalized_paths":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","pattern":"^/normalized_data/[A-Za-z0-9_/-]+$"}},"evidence_role":{"enum":["SUPPORTS","CONTRADICTS","CORRECTS"]},"event_time":{"$ref":"#/$defs/timestamp"},"observed_at":{"$ref":"#/$defs/timestamp"},"source_entity_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","pattern":"^urn:dex-ai:entity:[A-Za-z0-9:._/-]+$"}},"lineage_verified":{"const":true}}},
+    "confidence":{"type":"object","additionalProperties":false,"required":["status","score","method","assessed_at","evidence_count"],"properties":{"status":{"enum":["NOT_ASSESSED","ASSESSED"]},"score":{"type":["number","null"],"minimum":0,"maximum":1},"method":{"type":["string","null"]},"assessed_at":{"oneOf":[{"type":"null"},{"$ref":"#/$defs/timestamp"}]},"evidence_count":{"type":"integer","minimum":1}}},
+    "freshness":{"type":"object","additionalProperties":false,"required":["basis_event_time","evaluated_at","expires_at","status","profile_ref"],"properties":{"basis_event_time":{"$ref":"#/$defs/timestamp"},"evaluated_at":{"oneOf":[{"type":"null"},{"$ref":"#/$defs/timestamp"}]},"expires_at":{"oneOf":[{"type":"null"},{"$ref":"#/$defs/timestamp"}]},"status":{"enum":["NOT_EVALUATED","CURRENT","STALE","UNKNOWN"]},"profile_ref":{"type":["string","null"]}}},
+    "lineage":{"type":"object","additionalProperties":false,"required":["source_normalized_event_ids","source_raw_event_ids","source_raw_payload_refs","field_mappings","evidence_hashes","lineage_verified"],"properties":{"source_normalized_event_ids":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","pattern":"^urn:dex-ai:event:[0-9a-f]{32}$"}},"source_raw_event_ids":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","pattern":"^urn:dex-ai:event:[0-9a-f]{32}$"}},"source_raw_payload_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","pattern":"^urn:dex-ai:raw:[0-9a-f]{64}$"}},"field_mappings":{"type":"array","minItems":3,"items":{"type":"object","additionalProperties":false,"required":["fact_path","normalized_path"],"properties":{"fact_path":{"type":"string","pattern":"^/fact_value/[A-Za-z0-9_/-]+$"},"normalized_path":{"type":"string","pattern":"^/normalized_data/[A-Za-z0-9_/-]+$"}}}},"evidence_hashes":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","pattern":"^[0-9a-f]{64}$"}},"lineage_verified":{"const":true}}}
+  }
+}

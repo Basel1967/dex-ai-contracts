@@ -1,0 +1,23 @@
+{
+  "fact_id":"urn:dex-ai:fact:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "fact_version":1,
+  "entity_id":"urn:dex-ai:entity:solana:mint:11111111111111111111111111111111",
+  "entity_type":"SOLANA_MINT",
+  "fact_type":"MINT_INITIALIZED",
+  "fact_value":{"mint_address":"11111111111111111111111111111111","initialized":true,"synthetic":true},
+  "fact_status":"ACTIVE",
+  "valid_from":"2026-08-24T10:00:00.000000Z",
+  "valid_to":null,
+  "recorded_at":"2026-08-24T10:00:01.000000Z",
+  "supersedes_version":null,
+  "correction_reason":null,
+  "evidence":[{"normalized_event_id":"urn:dex-ai:event:11111111111111111111111111111111","normalized_payload_hash":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","normalized_paths":["/normalized_data/mint_address","/normalized_data/synthetic"],"evidence_role":"SUPPORTS","event_time":"2026-08-24T10:00:00.000000Z","observed_at":"2026-08-24T10:00:01.000000Z","source_entity_refs":["urn:dex-ai:entity:solana:mint:11111111111111111111111111111111"],"lineage_verified":true}],
+  "resolution_status":"UNCONTESTED",
+  "confidence":{"status":"NOT_ASSESSED","score":null,"method":null,"assessed_at":null,"evidence_count":1},
+  "freshness":{"basis_event_time":"2026-08-24T10:00:00.000000Z","evaluated_at":null,"expires_at":null,"status":"NOT_EVALUATED","profile_ref":null},
+  "lineage":{"source_normalized_event_ids":["urn:dex-ai:event:11111111111111111111111111111111"],"source_raw_event_ids":["urn:dex-ai:event:22222222222222222222222222222222"],"source_raw_payload_refs":["urn:dex-ai:raw:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"],"field_mappings":[{"fact_path":"/fact_value/mint_address","normalized_path":"/normalized_data/mint_address"},{"fact_path":"/fact_value/initialized","normalized_path":"/normalized_data/mint_address"},{"fact_path":"/fact_value/synthetic","normalized_path":"/normalized_data/synthetic"}],"evidence_hashes":["bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"],"lineage_verified":true},
+  "canonicalization_profile":"urn:dex-ai:canonicalization-profile:mint-initialized:1.0.0",
+  "schema_ref":"urn:dex-ai:schema:fact:canonical-fact:1.0.0",
+  "idempotency_key":"urn:dex-ai:idempotency:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "trace_id":"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+}

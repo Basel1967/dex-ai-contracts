@@ -1,0 +1,1 @@
+{"base":"valid/active-mint-initialized.json","mutation":{"confidence":{"status":"ASSESSED","score":0.8,"method":null,"assessed_at":"2026-08-24T10:00:02.000000Z","evidence_count":1}},"expected_error":"confidence-method"}

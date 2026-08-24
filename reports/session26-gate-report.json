@@ -1,0 +1,26 @@
+{
+  "session": "SESSION 26",
+  "decision": "PASS_FOUNDATION_CANDIDATE",
+  "contract": "urn:dex-ai:schema:fact:canonical-fact",
+  "version": "1.0.0",
+  "publication_status": "NOT_PUBLISHED",
+  "candidate": "releases/out/canonical-fact-v1.0.0-foundation-candidate.tar.gz",
+  "sha256": "136ba904fd0819422c7926613a0d76a9475f6928096a7945ef11322b92bea2e0",
+  "tests": {
+    "event_envelope": "43/43",
+    "raw_event": "12/12",
+    "normalized_event": "14/14",
+    "canonical_fact": "18/18"
+  },
+  "scope": {
+    "entity_types": [
+      "SOLANA_MINT"
+    ],
+    "fact_types": [
+      "MINT_INITIALIZED"
+    ],
+    "agents_started": false,
+    "services_started": false
+  },
+  "publication_requires_explicit_owner_approval": true
+}

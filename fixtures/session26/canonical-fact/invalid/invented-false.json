@@ -1,0 +1,1 @@
+{"base":"valid/active-mint-initialized.json","mutation":{"fact_value":{"mint_address":"11111111111111111111111111111111","initialized":false,"synthetic":true}},"expected_error":"initialized-false"}

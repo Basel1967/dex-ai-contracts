@@ -1,0 +1,1 @@
+{"base":"valid/unresolved-conflict.json","mutation":{"fact_status":"ACTIVE"},"expected_error":"active-contradiction"}
