@@ -1,0 +1,60 @@
+name: Publish Normalized Event v1.0.0
+
+on:
+  push:
+    paths:
+      - ".github/workflows/publish-normalized-event-v1.0.0.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout publication commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify candidate bytes and target commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git cat-file -t f7a0bfbd1c3c42a6590b0975f18af43bb40c4bee)" = commit
+          echo "348e1192e335eeaa037331dd7fd60758b2e89fef6ff84878c259902d606f4eda  releases/out/normalized-event-v1.0.0-foundation-candidate.tar.gz" | sha256sum -c -
+
+      - name: Publish tag and release from unchanged bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(git ls-remote --tags origin refs/tags/normalized-event-v1.0.0)"
+          cp releases/out/normalized-event-v1.0.0-foundation-candidate.tar.gz /tmp/normalized-event-v1.0.0.tar.gz
+          echo "348e1192e335eeaa037331dd7fd60758b2e89fef6ff84878c259902d606f4eda  /tmp/normalized-event-v1.0.0.tar.gz" | sha256sum -c -
+          gh release create normalized-event-v1.0.0 /tmp/normalized-event-v1.0.0.tar.gz \
+            --repo "${{ github.repository }}" \
+            --target f7a0bfbd1c3c42a6590b0975f18af43bb40c4bee \
+            --title "Normalized Event v1.0.0" \
+            --notes "Official publication of Normalized Event v1.0.0. Artifact SHA-256: 348e1192e335eeaa037331dd7fd60758b2e89fef6ff84878c259902d606f4eda"
+
+      - name: Verify published asset digest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/verify-release
+          gh release download normalized-event-v1.0.0 --repo "${{ github.repository }}" --pattern normalized-event-v1.0.0.tar.gz --dir /tmp/verify-release
+          echo "348e1192e335eeaa037331dd7fd60758b2e89fef6ff84878c259902d606f4eda  /tmp/verify-release/normalized-event-v1.0.0.tar.gz" | sha256sum -c -
+
+      - name: Remove temporary publication workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/publish-normalized-event-v1.0.0.yml
+          git commit -m "chore: remove temporary Normalized Event publication workflow"
+          git push origin HEAD:main
