@@ -1,0 +1,20 @@
+{
+  "normalization_status": "SUCCESS",
+  "source_raw_event_id": "urn:dex-ai:event:88888888888888888888888888888888",
+  "source_raw_payload_ref": "urn:dex-ai:raw:5555555555555555555555555555555555555555555555555555555555555555",
+  "normalizer_name": "solana-mint-normalizer",
+  "normalizer_version": "1.0.0",
+  "normalization_profile": "urn:dex-ai:normalization-profile:solana-mint:1.0.0",
+  "normalized_event_type": "MINT_INITIALIZED",
+  "normalized_entity_refs": ["urn:dex-ai:entity:token:source:So11111111111111111111111111111111111111112"],
+  "normalized_data": {"mint_address": "So11111111111111111111111111111111111111112", "synthetic": true},
+  "field_lineage": [
+    {"normalized_path": "/normalized_data/mint_address", "source_path": "/payload/mint", "transformation": "RENAME"},
+    {"normalized_path": "/normalized_data/synthetic", "source_path": "/payload/synthetic", "transformation": "COPY"}
+  ],
+  "normalization_warnings": [],
+  "normalization_errors": [],
+  "source_schema_ref": null,
+  "normalization_started_at": "2026-08-24T19:00:00.000000Z",
+  "normalization_completed_at": "2026-08-24T19:00:00.010000Z"
+}

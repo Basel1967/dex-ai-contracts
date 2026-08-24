@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:dex-ai:schema:event:normalized-event:1.0.0",
+  "title": "DEX AI Normalized Event Payload v1.0.0",
+  "x-artifact-status": "Foundation Candidate",
+  "x-publication-status": "NOT_PUBLISHED",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["normalization_status", "source_raw_event_id", "source_raw_payload_ref", "normalizer_name", "normalizer_version", "normalization_profile", "normalized_event_type", "normalized_entity_refs", "normalized_data", "field_lineage", "normalization_warnings", "normalization_errors", "source_schema_ref", "normalization_started_at", "normalization_completed_at"],
+  "properties": {
+    "normalization_status": {"enum": ["SUCCESS", "PARTIAL", "FAILED"]},
+    "source_raw_event_id": {"type": "string", "pattern": "^urn:dex-ai:event:[0-9a-f]{32}$"},
+    "source_raw_payload_ref": {"type": "string", "pattern": "^urn:dex-ai:raw:[0-9a-f]{64}$"},
+    "normalizer_name": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Za-z0-9._-]+$"},
+    "normalizer_version": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?$"},
+    "normalization_profile": {"type": "string", "pattern": "^urn:dex-ai:normalization-profile:[a-z0-9-]+:[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "normalized_event_type": {"enum": ["MINT_INITIALIZED"]},
+    "normalized_entity_refs": {"type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true, "items": {"type": "string", "pattern": "^urn:dex-ai:entity:[A-Za-z0-9:._/-]+$"}},
+    "normalized_data": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "object", "additionalProperties": false, "required": ["mint_address", "synthetic"], "properties": {"mint_address": {"type": "string", "minLength": 32, "maxLength": 44, "pattern": "^[1-9A-HJ-NP-Za-km-z]+$"}, "synthetic": {"type": "boolean"}}}
+      ]
+    },
+    "field_lineage": {"type": "array", "maxItems": 128, "items": {"type": "object", "additionalProperties": false, "required": ["normalized_path", "source_path", "transformation"], "properties": {"normalized_path": {"type": "string", "pattern": "^/normalized_data/[A-Za-z0-9_/-]+$"}, "source_path": {"type": "string", "pattern": "^/[A-Za-z0-9_~/-]+$"}, "transformation": {"enum": ["COPY", "RENAME", "TYPE_COERCE", "FORMAT_NORMALIZE", "DERIVE"]}}}},
+    "normalization_warnings": {"$ref": "#/$defs/diagnostics"},
+    "normalization_errors": {"$ref": "#/$defs/diagnostics"},
+    "source_schema_ref": {"oneOf": [{"type": "null"}, {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^(urn:|https://)[A-Za-z0-9._~:/#-]+$"}]},
+    "normalization_started_at": {"$ref": "#/$defs/timestamp"},
+    "normalization_completed_at": {"$ref": "#/$defs/timestamp"}
+  },
+  "$defs": {
+    "timestamp": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]\\.[0-9]{6}Z$"},
+    "diagnostics": {"type": "array", "maxItems": 128, "items": {"type": "object", "additionalProperties": false, "required": ["code", "field_path", "message"], "properties": {"code": {"type": "string", "pattern": "^NORM-[A-Z]+-[0-9]{3}$"}, "field_path": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^/[A-Za-z0-9_~/-]+$"}]}, "message": {"type": "string", "minLength": 1, "maxLength": 512}}}}
+  }
+}

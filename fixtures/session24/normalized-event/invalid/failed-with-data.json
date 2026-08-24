@@ -1,0 +1,1 @@
+{"base":"valid/failed.json","mutation":{"normalized_data":{"mint_address":"So11111111111111111111111111111111111111112","synthetic":true}},"expected_error":"failed-with-data"}

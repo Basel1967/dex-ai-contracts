@@ -1,0 +1,35 @@
+{
+  "session": "SESSION 24",
+  "decision": "PASS_FOUNDATION_CANDIDATE",
+  "contract": "urn:dex-ai:schema:event:normalized-event",
+  "version": "1.0.0",
+  "publication_status": "NOT_PUBLISHED",
+  "candidate": "releases/out/normalized-event-v1.0.0-foundation-candidate.tar.gz",
+  "sha256": "348e1192e335eeaa037331dd7fd60758b2e89fef6ff84878c259902d606f4eda",
+  "dependencies": {
+    "event_envelope": {
+      "version": "1.0.0",
+      "sha256": "3bb89e3665261703dc22e94808d6c5e9bed114c29c66fdbd37904e01d98f4120",
+      "unchanged": true
+    },
+    "raw_event": {
+      "version": "1.0.0",
+      "sha256": "b0d5b5215d7c5a4dfd4e950655f671cac2628ef627d2a2062b9081cdfa40cd48",
+      "unchanged": true
+    }
+  },
+  "tests": {
+    "event_envelope": "43/43",
+    "raw_event": "12/12",
+    "normalized_event": "14/14"
+  },
+  "scope": {
+    "event_types": [
+      "MINT_INITIALIZED"
+    ],
+    "canonical_fact_started": false,
+    "agents_started": false,
+    "services_started": false
+  },
+  "publication_requires_explicit_owner_approval": true
+}

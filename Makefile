@@ -1,6 +1,6 @@
-.PHONY: all bootstrap lint envelope raw traceability security generate verify-generated package
+.PHONY: all bootstrap lint envelope raw normalized traceability security generate verify-generated package
 PYTHON := python3
-all: bootstrap lint envelope raw traceability security generate verify-generated package
+all: bootstrap lint envelope raw normalized traceability security generate verify-generated package
 bootstrap:
 	@$(PYTHON) -c "import sys; assert sys.version_info[:2] == (3,12), sys.version"
 	@echo BOOTSTRAP_PASS
@@ -12,20 +12,26 @@ envelope:
 	@$(PYTHON) tooling/validate/runner.py
 raw:
 	@$(PYTHON) tooling/validate/raw_event_runner.py
+normalized:
+	@$(PYTHON) tooling/validate/normalized_event_runner.py
 traceability:
 	@test -f specs/contracts/events/raw-event/v1.md
 	@test -f schemas/events/raw-event/1.0.0/schema.json
 	@test -f metadata/raw-event-artifact-metadata.json
+	@test -f specs/contracts/events/normalized-event/v1.md
+	@test -f schemas/events/normalized-event/1.0.0/schema.json
+	@test -f metadata/normalized-event-artifact-metadata.json
 	@echo TRACEABILITY_PASS
 security:
 	@! find . -type f \( -name '.env' -o -name 'id_rsa' \) | grep .
 	@$(PYTHON) -c "import hashlib,pathlib; p=pathlib.Path('releases/out/event-envelope-v1.0.0.tar.gz'); assert hashlib.sha256(p.read_bytes()).hexdigest()=='3bb89e3665261703dc22e94808d6c5e9bed114c29c66fdbd37904e01d98f4120'"
+	@$(PYTHON) -c "import hashlib,pathlib; p=pathlib.Path('releases/out/raw-event-v1.0.0.tar.gz'); assert hashlib.sha256(p.read_bytes()).hexdigest()=='b0d5b5215d7c5a4dfd4e950655f671cac2628ef627d2a2062b9081cdfa40cd48'"
 	@echo SECURITY_AND_IMMUTABILITY_PASS
 generate:
 	@mkdir -p generated/manifests
-	@sha256sum schemas/events/event-envelope/1.0.0/schema.json schemas/events/raw-event/1.0.0/schema.json > generated/manifests/session22-schemas.sha256
+	@sha256sum schemas/events/event-envelope/1.0.0/schema.json schemas/events/raw-event/1.0.0/schema.json schemas/events/normalized-event/1.0.0/schema.json > generated/manifests/session24-schemas.sha256
 	@echo GENERATED_NON_NORMATIVE
 verify-generated:
-	@sha256sum -c generated/manifests/session22-schemas.sha256
+	@sha256sum -c generated/manifests/session24-schemas.sha256
 package:
-	@$(PYTHON) tooling/session22_build.py
+	@$(PYTHON) tooling/session24_build.py

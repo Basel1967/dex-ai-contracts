@@ -1,0 +1,14 @@
+{
+  "artifact_id": "urn:dex-ai:schema:event:normalized-event",
+  "artifact_status": "Foundation Candidate",
+  "version": "1.0.0",
+  "publication_status": "NOT_PUBLISHED",
+  "owner": "Basel Atta",
+  "backup_owner": "Basel Atta",
+  "approval_status": "OWNER_APPROVED_FOUNDATION_SCOPE",
+  "dependencies": [
+    {"id": "urn:dex-ai:schema:event:event-envelope", "version": "1.0.0", "status": "PUBLISHED", "digest": "sha256:3bb89e3665261703dc22e94808d6c5e9bed114c29c66fdbd37904e01d98f4120"},
+    {"id": "urn:dex-ai:schema:event:raw-event", "version": "1.0.0", "status": "PUBLISHED", "digest": "sha256:b0d5b5215d7c5a4dfd4e950655f671cac2628ef627d2a2062b9081cdfa40cd48"}
+  ],
+  "scope": {"event_types": ["MINT_INITIALIZED"], "canonical_fact_started": false, "agents_started": false, "services_started": false}
+}

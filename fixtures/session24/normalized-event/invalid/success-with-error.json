@@ -1,0 +1,1 @@
+{"base":"valid/success-mint-initialized.json","mutation":{"normalization_errors":[{"code":"NORM-PARSE-001","field_path":"/payload","message":"Unexpected error."}]},"expected_error":"success-with-errors"}

@@ -1,6 +1,10 @@
 {
   "status": "ACTIVE",
-  "entries": [{"artifact":"urn:dex-ai:schema:event:raw-event:1.0.0","depends_on":"urn:dex-ai:schema:event:event-envelope:1.0.0","dependency_status":"PUBLISHED","relationship":"payload-carried-by-envelope"}],
-  "next_contract_after_event_envelope": "urn:dex-ai:schema:event:raw-event:1.0.0",
+  "entries": [
+    {"artifact":"urn:dex-ai:schema:event:raw-event:1.0.0","depends_on":"urn:dex-ai:schema:event:event-envelope:1.0.0","dependency_status":"PUBLISHED","relationship":"payload-carried-by-envelope"},
+    {"artifact":"urn:dex-ai:schema:event:normalized-event:1.0.0","depends_on":"urn:dex-ai:schema:event:event-envelope:1.0.0","dependency_status":"PUBLISHED","relationship":"payload-carried-by-envelope"},
+    {"artifact":"urn:dex-ai:schema:event:normalized-event:1.0.0","depends_on":"urn:dex-ai:schema:event:raw-event:1.0.0","dependency_status":"PUBLISHED","relationship":"deterministically-normalizes"}
+  ],
+  "next_contract": "urn:dex-ai:schema:event:normalized-event:1.0.0",
   "later_contracts_started": false
 }

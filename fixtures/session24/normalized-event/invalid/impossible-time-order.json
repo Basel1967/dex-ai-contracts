@@ -1,0 +1,1 @@
+{"base":"valid/success-mint-initialized.json","mutation":{"normalization_completed_at":"2026-08-24T18:59:59.999999Z"},"expected_error":"normalization-time-order"}

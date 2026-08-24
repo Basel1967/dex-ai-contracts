@@ -1,0 +1,79 @@
+{
+  "session": "SESSION 24",
+  "contract": "Normalized Event 1.0.0",
+  "status": "PASS",
+  "passed": 14,
+  "failed": 0,
+  "results": [
+    {
+      "test": "schema-draft-2020-12",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "schema-closed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "candidate-not-published",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "success-valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "failed-attempt-preserved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-failed-with-data",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-impossible-time-order",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-missing-lineage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "reject-success-with-error",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "published-dependencies-retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "normalized-candidate-registered",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "no-later-contract",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "immutable-event-envelope-v1.0.0.tar.gz",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "immutable-raw-event-v1.0.0.tar.gz",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}
