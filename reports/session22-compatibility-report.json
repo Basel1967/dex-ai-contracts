@@ -1,0 +1,1 @@
+{"status":"PASS","candidate":"urn:dex-ai:schema:event:raw-event:1.0.0","published_predecessor":false,"compatibility_mode":"NOT_APPLICABLE_FIRST_VERSION","dependency_compatibility":{"event_envelope":"1.0.0","result":"PASS_NO_PREDECESSOR_CHANGE"}}

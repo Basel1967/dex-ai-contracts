@@ -1,0 +1,23 @@
+BOOTSTRAP_PASS
+LINT_PASS
+{
+  "status": "PASS",
+  "passed": 43,
+  "failed": 0,
+  "blocked": []
+}
+{
+  "status": "PASS",
+  "passed": 12,
+  "failed": 0
+}
+TRACEABILITY_PASS
+SECURITY_AND_IMMUTABILITY_PASS
+GENERATED_NON_NORMATIVE
+schemas/events/event-envelope/1.0.0/schema.json: OK
+schemas/events/raw-event/1.0.0/schema.json: OK
+{
+  "status": "PASS",
+  "artifact": "raw-event-v1.0.0-foundation-candidate.tar.gz",
+  "sha256": "b0d5b5215d7c5a4dfd4e950655f671cac2628ef627d2a2062b9081cdfa40cd48"
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:dex-ai:schema:event:raw-event:1.0.0",
+  "title": "DEX AI Raw Event Payload v1.0.0",
+  "x-artifact-status": "Foundation Candidate",
+  "x-publication-status": "OPEN_FOR_RELEASE_CANDIDATE_NOT_PUBLISHED",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "capture_method", "request_or_subscription_ref", "source_endpoint_or_stream",
+    "source_received_at", "http_or_transport_metadata", "raw_content_type",
+    "raw_payload_ref", "raw_content_hash", "collector_clock",
+    "collection_attempt_id", "redaction_manifest"
+  ],
+  "properties": {
+    "capture_method": {"enum": ["POLL", "SUBSCRIPTION", "WEBHOOK", "REPLAY_READ", "INTERNAL_EMIT"]},
+    "request_or_subscription_ref": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[A-Za-z0-9:._/-]+$"},
+    "source_endpoint_or_stream": {
+      "type": "string", "minLength": 8, "maxLength": 512,
+      "pattern": "^(https://|wss://|urn:dex-ai:)[A-Za-z0-9._~:/#-]+$",
+      "not": {"pattern": "(@|[?&](token|sig|key|secret|credential|authorization|cookie)=)"}
+    },
+    "source_received_at": {"$ref": "#/$defs/timestamp"},
+    "http_or_transport_metadata": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["transport", "status_code", "content_encoding", "message_id"],
+          "properties": {
+            "transport": {"enum": ["HTTP", "WEBSOCKET", "GEYSER", "RPC", "INTERNAL"]},
+            "status_code": {"oneOf": [{"type": "integer", "minimum": 100, "maximum": 599}, {"type": "null"}]},
+            "content_encoding": {"oneOf": [{"enum": ["IDENTITY", "GZIP", "DEFLATE", "BR"]}, {"type": "null"}]},
+            "message_id": {"oneOf": [{"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[A-Za-z0-9:._/-]+$"}, {"type": "null"}]}
+          }
+        }
+      ]
+    },
+    "raw_content_type": {"enum": ["application/json", "application/octet-stream"]},
+    "raw_payload_ref": {"type": "string", "pattern": "^urn:dex-ai:raw:[0-9a-f]{64}$"},
+    "raw_content_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "collector_clock": {
+      "type": "object", "additionalProperties": false,
+      "required": ["clock_source", "captured_at", "uncertainty_ms"],
+      "properties": {
+        "clock_source": {"enum": ["SYSTEM_UTC", "SOURCE_REPORTED", "MONOTONIC_CORRELATED"]},
+        "captured_at": {"$ref": "#/$defs/timestamp"},
+        "uncertainty_ms": {"type": "integer", "minimum": 0, "maximum": 60000}
+      }
+    },
+    "collection_attempt_id": {"type": "string", "pattern": "^urn:dex-ai:collection-attempt:[0-9a-f]{32}$"},
+    "source_cursor_or_checkpoint": {"type": "string", "minLength": 1, "maxLength": 512, "pattern": "^[A-Za-z0-9:._/-]+$"},
+    "redaction_manifest": {
+      "type": "array", "maxItems": 64,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["rule_id", "action", "field_path", "reason"],
+        "properties": {
+          "rule_id": {"type": "string", "pattern": "^RAW-REDACT-[0-9]{3}$"},
+          "action": {"enum": ["REMOVE", "MASK", "HASH"]},
+          "field_path": {"type": "string", "minLength": 1, "maxLength": 256},
+          "reason": {"enum": ["CREDENTIAL", "SECRET", "UNNECESSARY_PRIVATE_DATA", "LEGAL_REQUIREMENT", "SAFETY"]}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "timestamp": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]\\.[0-9]{6}Z$"}
+  }
+}

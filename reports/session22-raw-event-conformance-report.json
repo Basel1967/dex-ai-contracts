@@ -1,0 +1,69 @@
+{
+  "session": "SESSION 22",
+  "contract": "Raw Event 1.0.0",
+  "status": "PASS",
+  "passed": 12,
+  "failed": 0,
+  "results": [
+    {
+      "test": "raw-schema-2020-12",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "raw-schema-closed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "raw-gate-open-after-verification",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "raw-minimal-valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "raw-payload-digest-valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "raw-reject-missing-capture-method",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "raw-reject-raw-reference-mismatch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "raw-reject-secret-bearing-endpoint",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "raw-tampering-detected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "event-envelope-registry-published",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "raw-only-next-contract",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "published-envelope-digest-unchanged",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

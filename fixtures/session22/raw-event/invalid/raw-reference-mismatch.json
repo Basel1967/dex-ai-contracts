@@ -1,0 +1,2 @@
+{"expected_error":"mismatch:raw_payload_ref","fixture_from":"fixtures/session22/raw-event/valid/minimal.json","mutation":{"replace":{"payload.raw_payload_ref":"urn:dex-ai:raw:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}}}
+

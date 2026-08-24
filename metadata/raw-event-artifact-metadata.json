@@ -1,0 +1,21 @@
+{
+  "artifact_id": "urn:dex-ai:schema:event:raw-event",
+  "artifact_status": "Published",
+  "version": "1.0.0",
+  "publication_status": "PUBLISHED",
+  "owner": "Basel Atta",
+  "backup_owner": "Basel Atta",
+  "approval_status": "OWNER_APPROVED_RELEASE",
+  "dependency": {
+    "id": "urn:dex-ai:schema:event:event-envelope",
+    "version": "1.0.0",
+    "status": "PUBLISHED",
+    "digest": "sha256:3bb89e3665261703dc22e94808d6c5e9bed114c29c66fdbd37904e01d98f4120"
+  },
+  "normative_sources": [
+    "DEX AI — Repository Bootstrap & Executable Contracts Specification v1.0",
+    "DEX AI — Event Taxonomy & Data Contracts v1.0",
+    "DEX AI — Data Sources & Collection Architecture v1.0",
+    "Basel Atta safe-standard-type approval 2026-08-24"
+  ]
+}

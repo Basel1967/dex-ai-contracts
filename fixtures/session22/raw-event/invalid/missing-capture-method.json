@@ -1,0 +1,2 @@
+{"expected_error":"missing:capture_method","fixture_from":"fixtures/session22/raw-event/valid/minimal.json","mutation":{"remove":"payload.capture_method"}}
+

@@ -1,10 +1,8 @@
 {
-  "status": "PASS_WITH_BLOCKERS",
+  "status": "PASS",
   "passed": 43,
   "failed": 0,
-  "blocked": [
-    "MSR-011"
-  ],
+  "blocked": [],
   "results": [
     {
       "test": "valid-corrected-event",
@@ -217,7 +215,7 @@
       "passed": true
     },
     {
-      "test": "publication-fail-closed",
+      "test": "publication-state-consistent",
       "detail": "",
       "passed": true
     }

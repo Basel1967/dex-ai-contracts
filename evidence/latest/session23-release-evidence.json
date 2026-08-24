@@ -1,0 +1,28 @@
+{
+  "session": "SESSION 23",
+  "decision": "PASS_RAW_EVENT_V1_PUBLISHED",
+  "contract": "urn:dex-ai:schema:event:raw-event",
+  "version": "1.0.0",
+  "promotion": {
+    "candidate": "releases/out/raw-event-v1.0.0-foundation-candidate.tar.gz",
+    "published_artifact": "releases/out/raw-event-v1.0.0.tar.gz",
+    "candidate_sha256": "b0d5b5215d7c5a4dfd4e950655f671cac2628ef627d2a2062b9081cdfa40cd48",
+    "published_sha256": "b0d5b5215d7c5a4dfd4e950655f671cac2628ef627d2a2062b9081cdfa40cd48",
+    "digest_verified": true,
+    "same_artifact_bytes": true,
+    "rebuild_performed": false
+  },
+  "dependency": {
+    "event_envelope_version": "1.0.0",
+    "published_release_sha256": "3bb89e3665261703dc22e94808d6c5e9bed114c29c66fdbd37904e01d98f4120",
+    "unchanged": true
+  },
+  "scope": {
+    "published_contracts": ["Raw Event v1.0.0"],
+    "normalized_event_started": false,
+    "agent_started": false,
+    "service_started": false
+  },
+  "approved_by": "Basel Atta",
+  "approval_date": "2026-08-24"
+}
