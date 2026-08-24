@@ -1,0 +1,21 @@
+name: publish-event-envelope-v1
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-event-envelope-v1.yml
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: b4c1fd5fa630acbf7988a1a8ceb7daae5fb3fea7
+      - name: Verify immutable artifact digest
+        run: echo "3bb89e3665261703dc22e94808d6c5e9bed114c29c66fdbd37904e01d98f4120  releases/out/event-envelope-v1.0.0.tar.gz" | sha256sum --check -
+      - name: Create official tag and GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create event-envelope-v1.0.0 releases/out/event-envelope-v1.0.0.tar.gz --target b4c1fd5fa630acbf7988a1a8ceb7daae5fb3fea7 --title "Event Envelope v1.0.0" --notes-file reports/session21-final-report.md --latest
